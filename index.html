@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>WILDERNESS 40 — 40 Days. No Excuses.</title>
+<meta name="description" content="A zero-mercy 40-day spiritual discipline challenge. Pray. Read. Fast. Train. Miss one day and you start again. Matthew 4:1.">
+<meta name="theme-color" content="#F7F2E8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Wilderness 40">
+<!-- Favicon: the 40 mark, inline -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Ccircle cx='256' cy='256' r='256' fill='%23F7F2E8'/%3E%3Cg stroke='%232B2620' fill='none'%3E%3Cline x1='205' y1='150' x2='205' y2='362' stroke-width='40'/%3E%3Cline x1='98' y1='284' x2='238' y2='284' stroke-width='34'/%3E%3Cline x1='203' y1='158' x2='106' y2='284' stroke-width='34'/%3E%3C/g%3E%3Ccircle cx='336' cy='256' r='88' fill='%23B85C1F'/%3E%3Ccircle cx='336' cy='256' r='52' fill='%23F7F2E8'/%3E%3C/svg%3E">
+<!-- TODO: export logo-a-40mark.svg as /icon180.png (180x180) and /icon512.png (512x512), drop both in the repo root -->
+<link rel="apple-touch-icon" href="/icon180.png">
+<link rel="manifest" href='data:application/manifest+json,{"name":"Wilderness 40","short_name":"W40","display":"standalone","background_color":"%23F7F2E8","theme_color":"%23F7F2E8","start_url":"/","icons":[{"src":"/icon512.png","sizes":"512x512","type":"image/png"}]}'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#F7F2E8;        /* desert daylight — warm parchment bg */
+    --scorch:#FFFDF8;       /* card surface — near white */
+    --scorch-2:#EFE8DA;     /* raised / disabled surface */
+    --bone:#2B2620;         /* primary text — warm ink */
+    --dust:#87796A;         /* muted text */
+    --ember:#B85C1F;        /* refining fire — terracotta */
+    --ember-glow:#9A4A14;   /* deep ember for text & borders */
+    --blood:#8E2A20;        /* failure / reset */
+    --blood-bright:#B03A2C;
+    --line:#E3DACA;
+    --ok:#5F7A3A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--night);
+    color:var(--bone);
+    font-family:'Spectral',Georgia,serif;
+    font-size:17px;line-height:1.6;
+    min-height:100vh;
+    background-image:radial-gradient(ellipse 90% 50% at 50% -10%, rgba(184,92,31,.06), transparent 60%);
+  }
+  .stat,.task,.covenant,.pro-card{box-shadow:0 1px 3px rgba(43,38,32,.06)}
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px 96px}
+  h1,h2,h3{font-family:'Cinzel',serif;letter-spacing:.06em;text-transform:uppercase}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  button{font-family:'IBM Plex Mono',monospace;cursor:pointer;border:none}
+  button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--ember);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+  /* ---------- header ---------- */
+  header{padding:44px 0 8px;text-align:center}
+  .brand{font-family:'Cinzel',serif;font-weight:900;font-size:30px;letter-spacing:.14em}
+  .brand .forty{color:var(--ember)}
+  .tagline{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.28em;color:var(--dust);text-transform:uppercase;margin-top:6px}
+  .rule-hr{height:1px;background:linear-gradient(90deg,transparent,var(--line) 20%,var(--ember) 50%,var(--line) 80%,transparent);border:0;margin:26px 0}
+
+  /* ---------- add-to-home-screen banner ---------- */
+  .a2hs{
+    display:flex;align-items:center;gap:12px;
+    background:var(--scorch);border:1px solid var(--ember);
+    padding:14px 16px;margin-bottom:22px;
+    box-shadow:0 1px 3px rgba(43,38,32,.06);
+  }
+  .a2hs p{font-size:14px;color:var(--bone);line-height:1.45;flex:1}
+  .a2hs p b{color:var(--ember-glow)}
+  .a2hs .steps{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dust);display:block;margin-top:4px;letter-spacing:.04em}
+  .a2hs button{background:none;color:var(--dust);font-size:16px;padding:4px 8px;flex:none}
+  .a2hs button:hover{color:var(--bone)}
+
+  /* ---------- verse ---------- */
+  .verse{font-style:italic;font-size:18px;text-align:center;color:var(--bone);padding:4px 8px}
+  .verse-ref{display:block;font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--ember);margin-top:10px;text-transform:uppercase}
+
+  /* ---------- status ---------- */
+  .status{display:flex;justify-content:space-between;gap:12px;margin:28px 0 10px}
+  .stat{flex:1;background:var(--scorch);border:1px solid var(--line);padding:16px 8px;text-align:center}
+  .stat .num{font-family:'Cinzel',serif;font-weight:900;font-size:34px;line-height:1;color:var(--ember)}
+  .stat .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--dust);text-transform:uppercase;margin-top:8px}
+
+  /* ---------- the path (signature 40-stone grid) ---------- */
+  .path{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin:18px 0 8px}
+  .stone{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    background:var(--scorch);border:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dust);
+    position:relative;transition:background .3s,border-color .3s,color .3s;
+  }
+  .stone.done{background:linear-gradient(160deg,var(--ember),#8f5620);border-color:var(--ember-glow);color:var(--night);font-weight:700}
+  .stone.today{border-color:var(--ember-glow);color:var(--ember-glow);animation:emberPulse 2.4s ease-in-out infinite}
+  .stone.failedmark{background:var(--blood);border-color:var(--blood-bright);color:var(--bone)}
+  @keyframes emberPulse{0%,100%{box-shadow:0 0 0 0 rgba(184,92,31,0)}50%{box-shadow:0 0 12px 1px rgba(184,92,31,.35)}}
+  .path-caption{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--dust);text-transform:uppercase;text-align:center;margin-bottom:24px}
+
+  /* ---------- checklist ---------- */
+  .day-head{display:flex;align-items:baseline;justify-content:space-between;margin:26px 0 12px}
+  .day-head h2{font-size:16px;color:var(--bone)}
+  .countdown{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dust)}
+  .countdown b{color:var(--ember-glow);font-weight:700}
+  .task{
+    display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+    background:var(--scorch);border:1px solid var(--line);
+    padding:16px;margin-bottom:10px;color:var(--bone);
+    font-family:'Spectral',serif;font-size:16px;transition:border-color .2s,background .2s;
+  }
+  .task:hover{border-color:var(--dust)}
+  .task .box{
+    width:22px;height:22px;flex:none;border:2px solid var(--dust);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--night);transition:all .2s;
+  }
+  .task.checked{border-color:var(--ember)}
+  .task.checked .box{background:var(--ember);border-color:var(--ember)}
+  .task.checked .txt{color:var(--dust);text-decoration:line-through;text-decoration-color:var(--ember)}
+  .task .sub{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--dust);text-transform:uppercase;margin-top:2px}
+  .task.locked{opacity:.45}
+  .task.locked .box{border-style:dashed}
+
+  .seal-btn{
+    width:100%;padding:18px;margin-top:14px;
+    background:var(--ember);color:var(--night);
+    font-size:13px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;
+    transition:background .2s,opacity .2s;
+  }
+  .seal-btn:hover{background:var(--ember-glow)}
+  .seal-btn:disabled{background:var(--scorch-2);color:var(--dust);cursor:not-allowed}
+  .sealed-note{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ok);text-align:center;padding:18px 0 4px}
+
+  .confess{
+    width:100%;margin-top:26px;padding:16px;background:var(--blood);
+    border:none;color:#FBF6EE;font-weight:700;
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;transition:background .2s;
+    box-shadow:0 1px 3px rgba(43,38,32,.12);
+  }
+  .confess:hover{background:var(--blood-bright)}
+
+  /* ---------- covenant / onboarding ---------- */
+  .covenant{background:var(--scorch);border:1px solid var(--line);padding:28px 22px;margin-top:26px}
+  .covenant h2{font-size:15px;color:var(--ember);margin-bottom:14px}
+  .covenant p{color:var(--dust);font-size:15px;margin-bottom:12px}
+  .covenant ol{margin:0 0 18px 20px;color:var(--bone)}
+  .covenant li{margin-bottom:8px;font-size:15px}
+  .covenant li b{color:var(--ember-glow);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em}
+  .fast-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 20px}
+  .fast-opt{
+    padding:12px 8px;background:var(--night);border:1px solid var(--line);color:var(--dust);
+    font-size:11px;letter-spacing:.12em;text-transform:uppercase;transition:all .15s;
+  }
+  .fast-opt.sel{border-color:var(--ember);color:var(--ember-glow)}
+  .fast-opt.pro-lock{opacity:.5}
+
+  /* ---------- pro ---------- */
+  .pro-card{background:var(--scorch);border:1px solid var(--ember);padding:26px 22px;margin-top:34px}
+  .pro-card h2{font-size:15px;color:var(--ember-glow);margin-bottom:12px}
+  .pro-card ul{list-style:none}
+  .pro-card li{padding:7px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--bone)}
+  .pro-card li:last-child{border-bottom:none}
+  .pro-card li::before{content:"— ";color:var(--ember)}
+  .price{font-family:'Cinzel',serif;font-weight:900;font-size:26px;color:var(--bone);margin:16px 0 4px}
+  .price .was{color:var(--dust);text-decoration:line-through;text-decoration-color:var(--blood-bright);font-size:19px;margin-right:6px}
+  .price small{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--dust);display:block;margin-top:4px;text-transform:uppercase}
+  .key-row{display:flex;gap:8px;margin-top:14px}
+  .key-row input{
+    flex:1;background:var(--night);border:1px solid var(--line);color:var(--bone);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;padding:12px;letter-spacing:.06em;
+  }
+  .key-row button,.buy-btn{
+    background:var(--ember);color:var(--night);padding:12px 16px;
+    font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .buy-btn{display:block;width:100%;padding:15px;margin-top:12px;text-align:center;text-decoration:none;font-family:'IBM Plex Mono',monospace}
+  .key-msg{font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:10px;letter-spacing:.08em}
+  .key-msg.ok{color:var(--ok)} .key-msg.bad{color:var(--blood-bright)}
+
+  /* ---------- journal (Pro) ---------- */
+  .journal textarea{
+    width:100%;min-height:110px;background:var(--night);border:1px solid var(--line);
+    color:var(--bone);font-family:'Spectral',serif;font-size:15px;padding:14px;resize:vertical;
+  }
+  .journal .save{margin-top:10px;background:var(--scorch-2);color:var(--bone);border:1px solid var(--line);padding:11px 18px;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+  .journal .save:hover{border-color:var(--ember)}
+
+  /* ---------- history (Pro) ---------- */
+  .history-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dust)}
+  .history-row .r-days{color:var(--bone)}
+  .history-row .r-fail{color:var(--blood-bright)} .history-row .r-win{color:var(--ok)}
+
+  /* ---------- modal ---------- */
+  .modal-bg{position:fixed;inset:0;background:rgba(43,38,32,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+  .modal-bg.open{display:flex}
+  .modal{background:var(--scorch);border:1px solid var(--blood-bright);max-width:420px;width:100%;padding:30px 24px;text-align:center}
+  .modal h2{color:var(--blood-bright);font-size:18px;margin-bottom:14px}
+  .modal p{color:var(--dust);font-size:15px;margin-bottom:20px}
+  .modal .m-verse{font-style:italic;color:var(--bone);margin-bottom:20px}
+  .modal-actions{display:flex;gap:10px}
+  .modal-actions button{flex:1;padding:14px;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  .m-danger{background:var(--blood);color:var(--bone)} .m-danger:hover{background:var(--blood-bright)}
+  .m-cancel{background:transparent;border:1px solid var(--line);color:var(--dust)}
+
+  footer{margin-top:56px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--dust);text-transform:uppercase;line-height:2}
+  footer a{color:var(--dust)}
+  .hidden{display:none!important}
+  @media(max-width:420px){.path{grid-template-columns:repeat(5,1fr)}.stat .num{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">WILDERNESS <span class="forty">40</span></div>
+    <div class="tagline">40 days · No excuses · Matthew 4:1</div>
+  </header>
+  <hr class="rule-hr">
+
+  <!-- add-to-home-screen banner (shown on mobile browsers, hidden once installed or dismissed) -->
+  <div class="a2hs hidden" id="a2hsBanner">
+    <p><b>Protect your run.</b> Your progress lives on this device — add Wilderness 40 to your home screen so the browser never clears it.
+      <span class="steps" id="a2hsSteps">Share button → Add to Home Screen</span>
+    </p>
+    <button id="a2hsClose" aria-label="Dismiss">✕</button>
+  </div>
+
+  <div class="verse" id="verseText"></div>
+
+  <!-- ============ ONBOARDING ============ -->
+  <section id="onboard" class="covenant hidden">
+    <h2>The Covenant</h2>
+    <p>Forty days. Five requirements. Every single day. Miss one and the run is dead — you start again at day one. No grace periods. No catch-up days. This is the wilderness.</p>
+    <ol>
+      <li><b>PRAY</b> — 20 minutes of prayer, minimum.</li>
+      <li><b>READ</b> — one chapter of Scripture, minimum.</li>
+      <li><b>FAST</b> — keep the fast you choose below, all 40 days.</li>
+      <li><b>TRAIN</b> — 45 minutes of physical training. The body is a temple.</li>
+      <li><b>ABSTAIN</b> — zero vices. You know what yours are.</li>
+    </ol>
+    <p style="color:var(--bone)">Choose your fast:</p>
+    <div class="fast-pick" id="fastPick"></div>
+    <button class="seal-btn" id="beginBtn">I enter the wilderness</button>
+  </section>
+
+  <!-- ============ ACTIVE RUN ============ -->
+  <section id="run" class="hidden">
+    <div class="status">
+      <div class="stat"><div class="num" id="statDay">1</div><div class="lbl">Day</div></div>
+      <div class="stat"><div class="num" id="statLeft">40</div><div class="lbl">Remaining</div></div>
+      <div class="stat"><div class="num" id="statAttempt">1</div><div class="lbl">Attempt</div></div>
+    </div>
+
+    <div class="path" id="path"></div>
+    <div class="path-caption">The path through the wilderness</div>
+
+    <div class="day-head">
+      <h2>Today's requirements</h2>
+      <div class="countdown">Seals at midnight — <b id="clock">00:00:00</b></div>
+    </div>
+    <div id="tasks"></div>
+    <button class="seal-btn" id="sealBtn" disabled>Seal the day</button>
+    <div class="sealed-note hidden" id="sealedNote">Day sealed. Return at dawn.</div>
+
+    <!-- Pro: war journal -->
+    <section class="covenant journal" id="journalBox" style="margin-top:30px">
+      <h2 id="journalTitle">Evening Watch</h2>
+      <p id="journalLockMsg" class="hidden" style="color:var(--dust)">The Evening Watch is a Pro discipline. Unlock below.</p>
+      <textarea id="journalText" placeholder="Where you struggled today. Where you stood firm. What you carry into tomorrow."></textarea>
+      <button class="save" id="journalSave">Commit entry</button>
+    </section>
+
+    <button class="confess" id="confessBtn">Confess failure — restart at day 1</button>
+  </section>
+
+  <!-- ============ VICTORY ============ -->
+  <section id="victory" class="covenant hidden" style="border-color:var(--ember);text-align:center">
+    <h2 style="color:var(--ember-glow)">Forty days. Finished.</h2>
+    <p style="color:var(--bone);font-style:italic;margin:14px 0">"Then the devil leaveth him, and, behold, angels came and ministered unto him." — Matthew 4:11</p>
+    <p>You walked the whole path. Most never make it past day three.</p>
+    <button class="seal-btn" id="againBtn">Enter the wilderness again</button>
+  </section>
+
+  <!-- ============ PRO ============ -->
+  <section class="pro-card" id="proCard">
+    <h2>Unlock Wilderness 40</h2>
+    <ul>
+      <li>Seal your days — the run only counts once it's yours</li>
+      <li>The Path — a guided reading for every one of the 40 days</li>
+      <li>Evening Watch — daily reflections, kept forever</li>
+      <li>Custom fast & custom sixth requirement</li>
+      <li>Run history & attempt record</li>
+    </ul>
+    <div class="price" id="priceBox"></div>
+    <a class="buy-btn" id="buyBtn" href="#" >Unlock Pro</a>
+    <div class="key-row">
+      <input type="text" id="keyInput" placeholder="Enter unlock key" autocomplete="off">
+      <button id="keyBtn">Verify</button>
+    </div>
+    <div class="key-msg" id="keyMsg"></div>
+  </section>
+
+  <!-- Pro: run history -->
+  <section class="covenant hidden" id="historyBox" style="margin-top:26px">
+    <h2>Run History</h2>
+    <div id="historyRows"></div>
+  </section>
+
+  <footer>
+    Wilderness 40 · wilderness40.app<br>
+    Scripture quotations from the King James Version (public domain)<br>
+    Your progress lives on this device — add to home screen to protect it
+  </footer>
+</div>
+
+<!-- ============ RESET MODAL ============ -->
+<div class="modal-bg" id="resetModal">
+  <div class="modal">
+    <h2>The run dies here</h2>
+    <p id="resetReason">You failed to seal the day. The covenant is broken.</p>
+    <div class="m-verse">"For a just man falleth seven times, and riseth up again." — Proverbs 24:16</div>
+    <div class="modal-actions">
+      <button class="m-cancel" id="resetCancel">Not yet</button>
+      <button class="m-danger" id="resetConfirm">Restart at day 1</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   WILDERNESS 40 — single-file app
+   Storage: localStorage w/ safe fallback (sandbox previews)
+   Pro: unlock-key verification — same pattern as Crucible:
+     POST /api/verify-key { key }  ->  { valid: true }
+   Stripe payment link goes on #buyBtn href.
+   ========================================================= */
+
+const VERIFY_ENDPOINT = "/api/verify-key";           // TODO: your Vercel serverless fn
+
+/* ---------- Founders deal ----------
+   Before the deadline: £4.99 founders price (strikethrough £7.99).
+   After: flips to £7.99 automatically — no redeploy needed.
+   Set deadline in UK time; month is 0-indexed (6 = July). */
+const FOUNDERS_DEADLINE = new Date(2026, 6, 26, 23, 59, 59); // TODO: set your real end date
+const STRIPE_LINK_FOUNDERS = "https://buy.stripe.com/REPLACE_FOUNDERS"; // TODO: £4.99 payment link
+const STRIPE_LINK_STANDARD = "https://buy.stripe.com/REPLACE_STANDARD"; // TODO: £7.99 payment link
+function foundersActive(){ return Date.now() < FOUNDERS_DEADLINE.getTime(); }
+
+/* ---------- safe storage (falls back to memory in sandboxed previews) ---------- */
+const mem = {};
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return mem[k] ?? null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){ mem[k]=v; } },
+  del(k){ try { localStorage.removeItem(k); } catch(e){ delete mem[k]; } }
+};
+
+/* ---------- 40 KJV verses, one per day (public domain) ---------- */
+const VERSES = [
+["And when he had fasted forty days and forty nights, he was afterward an hungred.","Matthew 4:2"],
+["Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God.","Matthew 4:4"],
+["He that hath no rule over his own spirit is like a city that is broken down, and without walls.","Proverbs 25:28"],
+["But I keep under my body, and bring it into subjection.","1 Corinthians 9:27"],
+["For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.","2 Timothy 1:7"],
+["Submit yourselves therefore to God. Resist the devil, and he will flee from you.","James 4:7"],
+["He that is slow to anger is better than the mighty; and he that ruleth his spirit than he that taketh a city.","Proverbs 16:32"],
+["Watch and pray, that ye enter not into temptation: the spirit indeed is willing, but the flesh is weak.","Matthew 26:41"],
+["Be sober, be vigilant; because your adversary the devil, as a roaring lion, walketh about, seeking whom he may devour.","1 Peter 5:8"],
+["No chastening for the present seemeth to be joyous, but grievous: nevertheless afterward it yieldeth the peaceable fruit of righteousness.","Hebrews 12:11"],
+["Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee.","Joshua 1:9"],
+["Create in me a clean heart, O God; and renew a right spirit within me.","Psalm 51:10"],
+["But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles.","Isaiah 40:31"],
+["I can do all things through Christ which strengtheneth me.","Philippians 4:13"],
+["Put on the whole armour of God, that ye may be able to stand against the wiles of the devil.","Ephesians 6:11"],
+["Iron sharpeneth iron; so a man sharpeneth the countenance of his friend.","Proverbs 27:17"],
+["For bodily exercise profiteth little: but godliness is profitable unto all things.","1 Timothy 4:8"],
+["And whatsoever ye do, do it heartily, as to the Lord, and not unto men.","Colossians 3:23"],
+["Thy word have I hid in mine heart, that I might not sin against thee.","Psalm 119:11"],
+["But Daniel purposed in his heart that he would not defile himself.","Daniel 1:8"],
+["I am doing a great work, so that I cannot come down.","Nehemiah 6:3"],
+["Keep thy heart with all diligence; for out of it are the issues of life.","Proverbs 4:23"],
+["If any man will come after me, let him deny himself, and take up his cross daily, and follow me.","Luke 9:23"],
+["Nay, in all these things we are more than conquerors through him that loved us.","Romans 8:37"],
+["Casting down imaginations... and bringing into captivity every thought to the obedience of Christ.","2 Corinthians 10:5"],
+["The horse is prepared against the day of battle: but safety is of the LORD.","Proverbs 21:31"],
+["Fear thou not; for I am with thee: be not dismayed; for I am thy God.","Isaiah 41:10"],
+["Strait is the gate, and narrow is the way, which leadeth unto life, and few there be that find it.","Matthew 7:14"],
+["Blessed is the man that endureth temptation: for when he is tried, he shall receive the crown of life.","James 1:12"],
+["God is faithful, who will not suffer you to be tempted above that ye are able.","1 Corinthians 10:13"],
+["Be still, and know that I am God.","Psalm 46:10"],
+["Whoso loveth instruction loveth knowledge: but he that hateth reproof is brutish.","Proverbs 12:1"],
+["Let us lay aside every weight, and the sin which doth so easily beset us, and let us run with patience the race that is set before us.","Hebrews 12:1"],
+["Thou therefore endure hardness, as a good soldier of Jesus Christ.","2 Timothy 2:3"],
+["Blessed be the LORD my strength, which teacheth my hands to war, and my fingers to fight.","Psalm 144:1"],
+["Whatsoever thy hand findeth to do, do it with thy might.","Ecclesiastes 9:10"],
+["As many as I love, I rebuke and chasten: be zealous therefore, and repent.","Revelation 3:19"],
+["Present your bodies a living sacrifice, holy, acceptable unto God, which is your reasonable service.","Romans 12:1"],
+["He which hath begun a good work in you will perform it until the day of Jesus Christ.","Philippians 1:6"],
+["I have fought a good fight, I have finished my course, I have kept the faith.","2 Timothy 4:7"]
+];
+
+const FASTS = ["No sugar","No alcohol","No social media","No fast food","No caffeine","One meal a day","No streaming / TV","Custom fast (Pro)"];
+
+/* ---------- THE PATH — 40-day guided reading plan (Pro) ---------- */
+const READINGS = [
+["Matthew 4:1–11","Into the wilderness"],
+["Exodus 3","The call"],
+["Exodus 14","No way back"],
+["Exodus 16","Daily bread"],
+["Exodus 17:1–7","Water from the rock"],
+["Deuteronomy 8","Why the wilderness"],
+["Psalm 63","Thirst in a dry land"],
+["Genesis 39","Joseph refuses"],
+["Daniel 1","Daniel's resolve"],
+["Daniel 3","The furnace"],
+["Daniel 6","The lions' den"],
+["Job 1","Tested"],
+["Job 2","Endurance"],
+["Psalm 1","The two paths"],
+["Romans 7","The war within"],
+["Romans 8","More than conquerors"],
+["Galatians 5","Flesh against Spirit"],
+["Ephesians 6:10–20","The whole armour"],
+["James 1","Count it joy"],
+["James 4","Resist the devil"],
+["Psalm 51","The clean heart"],
+["Hebrews 11","The witnesses"],
+["Hebrews 12","Run the race"],
+["1 Peter 1","Refined by fire"],
+["1 Peter 5","Sober and vigilant"],
+["2 Timothy 2","A good soldier"],
+["1 Corinthians 9:24–27","Run to win"],
+["Psalm 119:1–32","The hidden word"],
+["1 Kings 17","Fed by ravens"],
+["1 Kings 18","Fire on Carmel"],
+["1 Kings 19","The still small voice"],
+["Jonah 1–2","Running and returning"],
+["Luke 15:11–32","The return"],
+["Psalm 23","The shepherd"],
+["Isaiah 40","Wings as eagles"],
+["Matthew 5","The mount — the blessed"],
+["Matthew 6","The mount — pray and fast"],
+["Matthew 7","The narrow gate"],
+["Philippians 3","Press toward the mark"],
+["2 Timothy 4:1–8","The course, finished"]
+];
+
+/* ---------- state ---------- */
+function todayKey(d=new Date()){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function loadState(){
+  const raw = store.get("w40_state");
+  return raw ? JSON.parse(raw) : null;
+}
+function saveState(s){ store.set("w40_state", JSON.stringify(s)); }
+function isPro(){ return store.get("w40_pro") === "1"; }
+
+let state = loadState();
+let selectedFast = null;
+
+/* ---------- day math ---------- */
+function daysBetween(a,b){ // date-key strings
+  const [ay,am,ad]=a.split("-").map(Number),[by,bm,bd]=b.split("-").map(Number);
+  return Math.round((new Date(by,bm-1,bd)-new Date(ay,am-1,ad))/86400000);
+}
+
+/* On load: kill the run if a past day was never sealed.
+   Free users can't seal, so they live in a rolling day-1 demo —
+   the wilderness only starts counting once they've unlocked. */
+function enforceMercilessness(){
+  if(!state || !state.active) return;
+  if(!isPro()){ state.startDate = todayKey(); saveState(state); return; }
+  const today = todayKey();
+  const dayIndex = daysBetween(state.startDate, today); // 0-based
+  if(dayIndex >= 40){ // survived past day 40 — check final day sealed
+    if(state.sealed.length >= 40){ state.active=false; state.victory=true; saveState(state); }
+    else killRun("A day went unsealed. The wilderness does not forget.");
+    return;
+  }
+  // any past day (index < dayIndex) not sealed = dead
+  for(let i=0;i<dayIndex;i++){
+    if(!state.sealed.includes(i)) { killRun("Day "+(i+1)+" went unsealed. The covenant is broken."); return; }
+  }
+}
+function killRun(reason){
+  pushHistory(state, false);
+  const attempt = (state.attempt||1)+1;
+  state = { active:true, startDate:todayKey(), sealed:[], attempt, fast:state.fast, checks:{}, victory:false };
+  saveState(state);
+  document.getElementById("resetReason").textContent = reason;
+  document.getElementById("resetModal").classList.add("open");
+  // modal here is informational; confirm just closes
+  document.getElementById("resetConfirm").textContent = "Day 1. Again.";
+  document.getElementById("resetCancel").classList.add("hidden");
+}
+function pushHistory(s, won){
+  if(!s) return;
+  const h = JSON.parse(store.get("w40_history")||"[]");
+  h.unshift({ start:s.startDate, days:s.sealed.length, won, attempt:s.attempt||1 });
+  store.set("w40_history", JSON.stringify(h.slice(0,50)));
+}
+
+/* ---------- render ---------- */
+const $ = id => document.getElementById(id);
+
+function render(){
+  const onboard=$("onboard"), run=$("run"), victory=$("victory");
+  onboard.classList.add("hidden"); run.classList.add("hidden"); victory.classList.add("hidden");
+
+  // verse of the day
+  let vIdx = 0;
+  if(state && state.active) vIdx = Math.min(daysBetween(state.startDate, todayKey()), 39);
+  const [vt,vr] = VERSES[Math.max(0,vIdx)];
+  $("verseText").innerHTML = "&ldquo;"+vt+"&rdquo;<span class='verse-ref'>"+vr+" · KJV</span>";
+
+  if(!state || (!state.active && !state.victory)){ renderOnboard(); onboard.classList.remove("hidden"); }
+  else if(state.victory){ victory.classList.remove("hidden"); }
+  else { renderRun(); run.classList.remove("hidden"); }
+
+  renderPro(); renderHistory();
+}
+
+function renderOnboard(){
+  const pick=$("fastPick"); pick.innerHTML="";
+  FASTS.forEach((f,i)=>{
+    const b=document.createElement("button");
+    b.className="fast-opt"+(f.includes("Pro")&&!isPro()?" pro-lock":"");
+    b.textContent=f; b.type="button";
+    b.onclick=()=>{
+      if(f.includes("Pro")&&!isPro()){ alert("Custom fasts are a Pro discipline. Unlock below for £4.99 — one time."); return; }
+      let val=f;
+      if(f.includes("Custom")){ val=prompt("Name your fast:")||""; if(!val.trim())return; }
+      selectedFast=val;
+      [...pick.children].forEach(c=>c.classList.remove("sel")); b.classList.add("sel");
+      if(val!==f) b.textContent=val;
+    };
+    pick.appendChild(b);
+  });
+}
+
+function currentDayIndex(){ return daysBetween(state.startDate, todayKey()); }
+
+function renderRun(){
+  const dayIdx = Math.min(currentDayIndex(),39);
+  $("statDay").textContent = dayIdx+1;
+  $("statLeft").textContent = 40-(dayIdx+1);
+  $("statAttempt").textContent = state.attempt||1;
+
+  // path
+  const path=$("path"); path.innerHTML="";
+  for(let i=0;i<40;i++){
+    const s=document.createElement("div"); s.className="stone"; s.textContent=i+1;
+    if(state.sealed.includes(i)) s.classList.add("done");
+    else if(i===dayIdx) s.classList.add("today");
+    path.appendChild(s);
+  }
+
+  // tasks
+  const tKey="c_"+todayKey();
+  const checks = state.checks[tKey]||[false,false,false,false,false,false];
+  const custom = isPro() ? (store.get("w40_custom_rule")||null) : null;
+  const reading = READINGS[dayIdx];
+  const readTask = isPro()
+    ? ["Read: "+reading[0], "The Path · Day "+(dayIdx+1)+" — "+reading[1]]
+    : ["Read Scripture","One chapter minimum · The Path assigns it (Pro)"];
+  const defs=[
+    ["Pray","20 minutes minimum"],
+    readTask,
+    ["Keep the fast", state.fast||"Your chosen fast"],
+    ["Train","45 minutes. The body is a temple"],
+    ["Abstain","Zero vices. No exceptions"]
+  ];
+  if(custom) defs.push([custom,"Your sixth requirement"]);
+
+  const alreadySealed = state.sealed.includes(dayIdx);
+  const box=$("tasks"); box.innerHTML="";
+  defs.forEach((d,i)=>{
+    const t=document.createElement("button");
+    t.className="task"+(checks[i]?" checked":""); t.type="button";
+    t.innerHTML="<span class='box'>"+(checks[i]?"✕":"")+"</span><span><span class='txt'>"+d[0]+"</span><span class='sub'>"+d[1]+"</span></span>";
+    t.disabled = alreadySealed;
+    t.onclick=()=>{ checks[i]=!checks[i]; state.checks[tKey]=checks; saveState(state); renderRun(); };
+    box.appendChild(t);
+  });
+
+  const allDone = defs.every((_,i)=>checks[i]);
+  const sealBtn=$("sealBtn");
+  sealBtn.classList.toggle("hidden", alreadySealed);
+  $("sealedNote").classList.toggle("hidden", !alreadySealed);
+  if(isPro()){
+    sealBtn.disabled = !allDone;
+    sealBtn.textContent = allDone ? "Seal the day" : "Complete all requirements";
+  } else {
+    // the seal is the paywall — locked and visible from first load
+    sealBtn.disabled = false;
+    const price = foundersActive() ? "£4.99" : "£7.99";
+    sealBtn.textContent = allDone
+      ? "You did the work. Seal it — unlock for "+price
+      : "🔒 Sealing requires the full app — "+price+" once";
+  }
+
+  // journal lock
+  const pro=isPro();
+  $("confessBtn").classList.toggle("hidden", !pro);
+  $("journalText").classList.toggle("hidden",!pro);
+  $("journalSave").classList.toggle("hidden",!pro);
+  $("journalLockMsg").classList.toggle("hidden",pro);
+  if(pro){
+    const j=JSON.parse(store.get("w40_journal")||"{}");
+    $("journalText").value=j[todayKey()]||"";
+  }
+}
+
+function renderPro(){
+  // pricing
+  const pb=$("priceBox");
+  if(foundersActive()){
+    const d=FOUNDERS_DEADLINE;
+    const dateStr=d.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"});
+    pb.innerHTML="<span class='was'>£7.99</span> £4.99 <small>Founding price · one time · no subscription ever<br>Ends "+dateStr+"</small>";
+    $("buyBtn").href=STRIPE_LINK_FOUNDERS;
+    $("buyBtn").textContent="Unlock Pro — Founding Price";
+  } else {
+    pb.innerHTML="£7.99 <small>One time. No subscription. Ever.</small>";
+    $("buyBtn").href=STRIPE_LINK_STANDARD;
+    $("buyBtn").textContent="Unlock Pro";
+  }
+  $("proCard").classList.toggle("hidden", isPro() && false); // keep visible pre-purchase; hide fully if you prefer
+  if(isPro()){
+    $("proCard").querySelector("h2").textContent="Wilderness 40 — Unlocked";
+    $("buyBtn").classList.add("hidden");
+    $("keyInput").classList.add("hidden");
+    $("keyBtn").classList.add("hidden");
+  }
+}
+
+function renderHistory(){
+  const box=$("historyBox");
+  if(!isPro()){ box.classList.add("hidden"); return; }
+  const h=JSON.parse(store.get("w40_history")||"[]");
+  box.classList.toggle("hidden", h.length===0);
+  $("historyRows").innerHTML = h.map(r=>
+    "<div class='history-row'><span>"+r.start+" · attempt "+r.attempt+"</span>"+
+    "<span class='r-days'>"+r.days+"/40</span>"+
+    "<span class='"+(r.won?"r-win":"r-fail")+"'>"+(r.won?"FINISHED":"FELL")+"</span></div>"
+  ).join("");
+}
+
+/* ---------- countdown ---------- */
+function tick(){
+  const n=new Date(), mid=new Date(n); mid.setHours(24,0,0,0);
+  const s=Math.floor((mid-n)/1000);
+  $("clock").textContent = String(Math.floor(s/3600)).padStart(2,"0")+":"+String(Math.floor(s%3600/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+  // day rollover while page open
+  if(state && state.active && window._lastDay && window._lastDay!==todayKey()){ enforceMercilessness(); render(); }
+  window._lastDay = todayKey();
+}
+setInterval(tick,1000);
+
+/* ---------- events ---------- */
+$("beginBtn").onclick=()=>{
+  if(!selectedFast){ alert("Choose your fast. The wilderness demands it."); return; }
+  state={ active:true, startDate:todayKey(), sealed:[], attempt:1, fast:selectedFast, checks:{}, victory:false };
+  saveState(state); render();
+};
+$("sealBtn").onclick=()=>{
+  if(!isPro()){
+    $("proCard").scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  const dayIdx=Math.min(currentDayIndex(),39);
+  if(!state.sealed.includes(dayIdx)) state.sealed.push(dayIdx);
+  if(state.sealed.length>=40){ state.active=false; state.victory=true; pushHistory(state,true); }
+  saveState(state); render();
+};
+$("confessBtn").onclick=()=>{
+  $("resetReason").textContent="You are about to confess failure and restart at day 1. Attempt "+((state.attempt||1)+1)+".";
+  $("resetConfirm").textContent="Restart at day 1";
+  $("resetCancel").classList.remove("hidden");
+  $("resetModal").classList.add("open");
+};
+$("resetConfirm").onclick=()=>{
+  $("resetModal").classList.remove("open");
+  if(state.active && !state.victory){
+    pushHistory(state,false);
+    state={ active:true, startDate:todayKey(), sealed:[], attempt:(state.attempt||1)+1, fast:state.fast, checks:{}, victory:false };
+    saveState(state);
+  }
+  render();
+};
+$("resetCancel").onclick=()=>$("resetModal").classList.remove("open");
+$("againBtn").onclick=()=>{ state=null; store.del("w40_state"); selectedFast=null; render(); };
+
+$("journalSave").onclick=()=>{
+  const j=JSON.parse(store.get("w40_journal")||"{}");
+  j[todayKey()]=$("journalText").value;
+  store.set("w40_journal",JSON.stringify(j));
+  $("journalSave").textContent="Committed."; setTimeout(()=>$("journalSave").textContent="Commit entry",1500);
+};
+
+/* ---------- Pro key verification (Crucible pattern) ---------- */
+$("keyBtn").onclick=async()=>{
+  const key=$("keyInput").value.trim(); const msg=$("keyMsg");
+  if(!key){ msg.textContent="Enter your key."; msg.className="key-msg bad"; return; }
+  msg.textContent="Verifying…"; msg.className="key-msg";
+  try{
+    const r=await fetch(VERIFY_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key})});
+    const d=await r.json();
+    if(d.valid){ store.set("w40_pro","1"); msg.textContent="Pro unlocked. Walk on."; msg.className="key-msg ok"; render(); }
+    else { msg.textContent="Invalid key."; msg.className="key-msg bad"; }
+  }catch(e){ msg.textContent="Could not reach the server. Try again."; msg.className="key-msg bad"; }
+};
+
+/* ---------- add-to-home-screen banner ---------- */
+(function(){
+  const standalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  const dismissed = store.get("w40_a2hs_dismissed") === "1";
+  const ua = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/.test(ua);
+  const isAndroid = /Android/.test(ua);
+  if(!standalone && !dismissed && (isIOS || isAndroid)){
+    $("a2hsSteps").textContent = isIOS
+      ? "Safari: Share button → Add to Home Screen"
+      : "Menu (⋮) → Add to Home screen";
+    $("a2hsBanner").classList.remove("hidden");
+  }
+  $("a2hsClose").onclick = ()=>{ store.set("w40_a2hs_dismissed","1"); $("a2hsBanner").classList.add("hidden"); };
+})();
+
+/* ---------- boot ---------- */
+enforceMercilessness();
+render(); tick();
+</script>
+</body>
+</html>
