@@ -61,6 +61,40 @@
   button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--ember);outline-offset:2px}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
+/* ===== HERO — landing state ===== */
+body.landing header, body.landing .rule-hr{display:none}
+.hero{
+  position:relative;width:100vw;margin-left:calc(50% - 50vw);
+  min-height:100svh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-scene{position:absolute;inset:0;width:100%;height:100%}
+.hero-content{position:relative;text-align:center;padding:0 28px;max-width:600px}
+.hero-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.42em;color:var(--ember-glow);text-transform:uppercase}
+.hero-title{
+  font-family:'Cinzel',serif;font-weight:900;text-transform:uppercase;
+  font-size:clamp(46px,11vw,88px);line-height:1.05;letter-spacing:.02em;
+  color:var(--bone);margin:22px 0 0;
+}
+.hero-sub{
+  font-family:'Spectral',serif;font-size:17px;line-height:1.8;color:var(--dust);
+  max-width:400px;margin:28px auto 0;
+}
+.hero-cta{margin-top:44px;max-width:340px}
+.hero-verse{font-style:italic;font-size:14px;color:var(--dust);opacity:.8;margin-top:40px}
+.hero-scroll{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--dust);
+  animation:sink 2.4s ease-in-out infinite;
+}
+@keyframes sink{0%,100%{transform:translate(-50%,0);opacity:.5}50%{transform:translate(-50%,8px);opacity:1}}
+.drift-slow{animation:driftx 44s ease-in-out infinite alternate}
+.drift-a{animation:driftx 30s ease-in-out infinite alternate}
+.drift-b{animation:driftxr 24s ease-in-out infinite alternate}
+.drift-c{animation:driftx 18s ease-in-out infinite alternate}
+@keyframes driftx{from{transform:translateX(-12px)}to{transform:translateX(12px)}}
+@keyframes driftxr{from{transform:translateX(10px)}to{transform:translateX(-10px)}}
+
 /* ----- header ----- */
 header{padding:38px 0 4px;text-align:center}
 .brand{font-family:'Cinzel',serif;font-weight:900;font-size:26px;letter-spacing:.14em}
@@ -82,7 +116,7 @@ header{padding:38px 0 4px;text-align:center}
 .a2hs button:hover{color:var(--bone)}
 
 /* ===== THE DAY — full-bleed hero ===== */
-.day-hero{text-align:center;padding:14px 0 0}
+.day-hero{text-align:center;padding:28px 0 0}
 .day-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.34em;color:var(--dust);text-transform:uppercase}
 .day-num{
   font-family:'Cinzel',serif;font-weight:900;line-height:.9;
@@ -108,7 +142,7 @@ header{padding:38px 0 4px;text-align:center}
 .verse-ref{display:block;font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--ember);margin-top:10px;text-transform:uppercase}
 
 /* ===== THE TERRAIN — signature element ===== */
-.terrain-box{margin:26px -20px 0;position:relative}
+.terrain-box{margin:44px -20px 0;position:relative}
 .terrain-box svg{display:block;width:100%;height:auto}
 .terrain-caption{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--dust);text-transform:uppercase;text-align:center;margin:8px 0 0}
 .wp{fill:var(--night);stroke:var(--dust);stroke-width:1.2;opacity:.55}
@@ -119,7 +153,7 @@ header{padding:38px 0 4px;text-align:center}
 @keyframes waypulse{0%{opacity:.7;transform:scale(.4)}70%{opacity:0;transform:scale(1.6)}100%{opacity:0;transform:scale(1.6)}}
 
 /* ===== requirements — liturgical list ===== */
-.req-head{display:flex;align-items:baseline;justify-content:space-between;margin:34px 0 4px}
+.req-head{display:flex;align-items:baseline;justify-content:space-between;margin:56px 0 6px}
 .req-head h2{font-size:14px;color:var(--bone)}
 .req-count{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--dust)}
 .req-count b{color:var(--ember-glow)}
@@ -162,7 +196,7 @@ header{padding:38px 0 4px;text-align:center}
 .sealed-note{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ok);text-align:center;padding:22px 0 4px}
 
 .confess{
-  width:100%;margin-top:30px;padding:15px;background:transparent;
+  width:100%;margin-top:56px;padding:15px;background:transparent;
   border:1px solid var(--blood);color:var(--blood);font-weight:700;
   font-size:11px;letter-spacing:.24em;text-transform:uppercase;transition:all .2s;
 }
@@ -208,9 +242,16 @@ header{padding:38px 0 4px;text-align:center}
 }
 
 /* ----- covenant / onboarding ----- */
-.covenant{background:var(--scorch);border:1px solid var(--line);padding:32px 26px;margin-top:26px;box-shadow:0 1px 3px rgba(43,38,32,.06);position:relative}
+.covenant{
+  background:linear-gradient(180deg,#FFFDF8,#FCF8F0);
+  border:1px solid var(--line);padding:44px 32px;margin-top:88px;
+  box-shadow:0 1px 2px rgba(43,38,32,.05), 0 12px 32px rgba(43,38,32,.07);
+  position:relative;
+}
+#onboard .covenant{margin-top:56px}
+.covenant p{line-height:1.75}
 .covenant::after,.pro-card::after{
-  content:"";position:absolute;inset:6px;border:1px solid rgba(184,92,31,.18);pointer-events:none;
+  content:"";position:absolute;inset:7px;border:1px solid rgba(184,92,31,.18);pointer-events:none;
 }
 .covenant h2{font-size:15px;color:var(--ember);margin-bottom:14px}
 .covenant p{color:var(--dust);font-size:15px;margin-bottom:12px}
@@ -226,7 +267,12 @@ header{padding:38px 0 4px;text-align:center}
 .fast-opt.pro-lock{opacity:.5}
 
 /* ----- pro ----- */
-.pro-card{background:var(--scorch);border:1px solid var(--ember);padding:30px 26px;margin-top:38px;box-shadow:0 1px 3px rgba(43,38,32,.06);position:relative}
+.pro-card{
+  background:linear-gradient(180deg,#FFFDF8,#FCF8F0);
+  border:1px solid var(--ember);padding:44px 32px;margin-top:110px;
+  box-shadow:0 1px 2px rgba(43,38,32,.05), 0 12px 32px rgba(184,92,31,.09);
+  position:relative;
+}
 .pro-card h2{font-size:15px;color:var(--ember-glow);margin-bottom:12px}
 .pro-card ul{list-style:none}
 .pro-card li{padding:7px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--bone)}
@@ -273,7 +319,7 @@ header{padding:38px 0 4px;text-align:center}
 .m-danger{background:var(--blood);color:#FBF6EE} .m-danger:hover{background:var(--blood-bright)}
 .m-cancel{background:transparent;border:1px solid var(--line);color:var(--dust)}
 
-footer{margin-top:56px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--dust);text-transform:uppercase;line-height:2}
+footer{margin-top:130px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--dust);text-transform:uppercase;line-height:2}
 footer a{color:var(--dust)}
 .hidden{display:none!important}
 </style>
@@ -296,8 +342,38 @@ footer a{color:var(--dust)}
 
   <!-- ============ ONBOARDING ============ -->
   <section id="onboard" class="hidden">
+
+    <div class="hero">
+      <svg class="hero-scene" viewBox="0 0 800 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#B85C1F" stop-opacity=".14"/>
+            <stop offset=".55" stop-color="#B85C1F" stop-opacity=".04"/>
+            <stop offset="1" stop-color="#B85C1F" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="800" height="600" fill="url(#hsky)"/>
+        <g class="drift-slow">
+          <circle cx="590" cy="150" r="64" fill="none" stroke="#B85C1F" stroke-width="1" opacity=".3"/>
+          <circle cx="590" cy="150" r="48" fill="#B85C1F" opacity=".85"/>
+          <circle cx="590" cy="150" r="28" fill="#F7F2E8"/>
+        </g>
+        <g class="drift-a"><path d="M-40,420 L120,392 L260,330 L390,252 L480,300 L580,228 L690,288 L840,250 L840,600 L-40,600 Z" fill="#2B2620" opacity=".08"/></g>
+        <g class="drift-b"><path d="M-40,470 L100,448 L230,466 L360,420 L500,452 L640,404 L760,440 L840,420 L840,600 L-40,600 Z" fill="#2B2620" opacity=".12"/></g>
+        <g class="drift-c"><path d="M-40,530 C120,498 300,542 460,512 C600,486 720,528 840,502 L840,600 L-40,600 Z" fill="#2B2620" opacity=".18"/></g>
+      </svg>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Wilderness 40</div>
+        <h1 class="hero-title">Forty days.<br>No excuses.</h1>
+        <p class="hero-sub">Pray. Read. Fast. Train. Abstain. Every single day, for forty days. Miss one and you start again at day one.</p>
+        <button class="seal-btn hero-cta" id="heroCta">Enter the wilderness</button>
+        <div class="hero-verse">&ldquo;Then was Jesus led up of the Spirit into the wilderness.&rdquo; &mdash; Matthew 4:1</div>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">&darr;</div>
+    </div>
+
     <div class="verse" id="onboardVerse"></div>
-    <div class="covenant">
+    <div class="covenant" id="covenantCard">
       <h2>The Covenant</h2>
       <p>Forty days. Five requirements. Every single day. Miss one and the run is dead — you start again at day one. No grace periods. No catch-up days. This is the wilderness.</p>
       <ol>
@@ -366,7 +442,7 @@ footer a{color:var(--dust)}
     <button class="seal-btn" id="sealBtn" disabled>Seal the day</button>
     <div class="sealed-note hidden" id="sealedNote">Day sealed. Return at dawn.</div>
 
-    <section class="covenant journal" id="journalBox" style="margin-top:34px">
+    <section class="covenant journal" id="journalBox" style="margin-top:64px">
       <h2 id="journalTitle">Evening Watch</h2>
       <p id="journalLockMsg" class="hidden" style="color:var(--dust)">The Evening Watch is a Pro discipline. Unlock below.</p>
       <textarea id="journalText" placeholder="Where you struggled today. Where you stood firm. What you carry into tomorrow."></textarea>
@@ -618,12 +694,16 @@ function render(){
   onboard.classList.add("hidden"); run.classList.add("hidden"); victory.classList.add("hidden");
 
   if(!state || (!state.active && !state.victory)){
+    document.body.classList.add("landing");
     const [vt,vr]=VERSES[0];
     $("onboardVerse").innerHTML = "&ldquo;"+vt+"&rdquo;<span class='verse-ref'>"+vr+" &middot; KJV</span>";
     renderOnboard(); onboard.classList.remove("hidden");
   }
-  else if(state.victory){ victory.classList.remove("hidden"); }
-  else { renderRun(); run.classList.remove("hidden"); }
+  else {
+    document.body.classList.remove("landing");
+    if(state.victory){ victory.classList.remove("hidden"); }
+    else { renderRun(); run.classList.remove("hidden"); }
+  }
 
   renderPro(); renderHistory();
 }
@@ -803,6 +883,7 @@ function tick(){
 setInterval(tick,1000);
 
 /* ---------- events ---------- */
+$("heroCta").onclick=()=>{ $("covenantCard").scrollIntoView({behavior:"smooth",block:"start"}); };
 $("beginBtn").onclick=()=>{
   if(!selectedFast){ alert("Choose your fast. The wilderness demands it."); return; }
   state={ active:true, startDate:todayKey(), sealed:[], attempt:1, fast:selectedFast, checks:{}, victory:false };
